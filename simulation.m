@@ -21,3 +21,25 @@ y = [x;h;v;gamma];
 
 % Control variable CL / CL*alpha?
 CL = 0;
+
+%%%%%%%% EXERCISE 3 %%%%%%%%
+
+%%% i)
+
+x0_vals = [0, 1, 2];
+h0_vals = [];
+v0_vals = [100, 150, 200];
+gamma0_vals = [];
+
+results = [];
+
+for x0 = x0_range
+    for h0 = h0_range
+        for v0 = v0_range
+            for gamma0 = gamma0_range
+                % simulation
+            end
+        end
+    end
+end
+
