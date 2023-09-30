@@ -13,7 +13,7 @@ rho = 1.13; % kg/m^3, air density
 
 % State variables
 
-t = [0,60];
+tspan = [0,60];
 x0 = 0; % m
 h0 = 200;
 v0 = 150; % m/s
@@ -21,7 +21,7 @@ gamma0 = 0;
 
 y0 = [x0; h0; v0; gamma0];
 
-[t,y] = ode45(@(t,y) state_eqs(t,y,CD0,K,S,rho,m,g), t, y0);
+[t,y] = ode45(@(t,y) state_eqs(t,y,CD0,K,S,rho,m,g), tspan, y0);
 
 %%%%%%%% EXERCISE 3 %%%%%%%%
 %%% i)

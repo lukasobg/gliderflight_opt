@@ -7,7 +7,7 @@ function dy = state_eqs(t, y, CD0, K, S, rho, m, g)
     % Lift coefficient, depends on time, alpha omitted
     CL = 1.4*sin(0.5*t);
     
-    L = total_lift(CL, rho, v);
+    L = total_lift(CL, S, rho, v);
     D = total_drag(CD0, K, CL, S, rho, v);
     
     dy = [v*cos(gamma);
@@ -18,7 +18,7 @@ function dy = state_eqs(t, y, CD0, K, S, rho, m, g)
           (L - m*g*cos(gamma)) / (v*m);];
 end
 
-function L = total_lift(CL, rho, v)
+function L = total_lift(CL, S, rho, v)
     q = air_density(rho,v);
     L = CL*S*q;
 end
