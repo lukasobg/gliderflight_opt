@@ -5,15 +5,15 @@ function dy = state_eqs(t, y, CD0, K, S, rho, m, g)
     gamma = y(3);
 
     % Lift coefficient, depends on time, alpha omitted
-    CL = 1.4*sin(0.5*t);
+    CL = 0.0001; %1.4*sin(0.1*t);
     
     L = total_lift(CL, S, rho, v);
     D = total_drag(CD0, K, CL, S, rho, v);
     
     dy = [v*cos(gamma);
           v*sin(gamma);
-          -1/m * (L * sin(gamma) + D*cos(gamma));
-          -1/m * (m*g - L*cos(gamma) + D*sin(gamma));
+          %-1/m * (L * sin(gamma) + D*cos(gamma));
+          %-1/m * (m*g - L*cos(gamma) + D*sin(gamma));
           -(D/m + g*sin(gamma));
           (L - m*g*cos(gamma)) / (v*m);];
 end
