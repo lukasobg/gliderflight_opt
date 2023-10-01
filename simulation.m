@@ -1,11 +1,11 @@
 close all
 clear
 
-tspan = [0,200];
+tspan = [0,150];
 
 % State variables
 x0 = 0; % m
-h0 = 300;
+h0 = 200;
 v0 = 20; % m/s
 gamma0 = 0; %pi/4;
 
@@ -19,8 +19,12 @@ v = y(:,3);
 gamma = y(:,4);
 
 % find t when crashing
-tend = find(h < 0);
-tend = t(tend(1));
+tend = t(length(t));
+idx = find(h <= 0);
+if ~isempty(idx) % did not crash during sim
+    tend = t(idx(1));
+end
+
 
 figure;
 
