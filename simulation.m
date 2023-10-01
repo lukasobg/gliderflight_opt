@@ -1,46 +1,54 @@
 close all
 clear
 
-% Parameters
-m = 100; % kg
-S = 14; % m^2
-CD0 = 0.034; % zero drag coefficient
-K = 0.07; % induced drag coefficient
-g = 9.81;
-rho = 1.13; % kg/m^3, air density
+tspan = [0,200];
 
 % State variables
-tspan = [0,200];
 x0 = 0; % m
-h0 = 500;
-v0 = 100; % m/s
-gamma0 = -pi/4; %pi/4;
+h0 = 300;
+v0 = 20; % m/s
+gamma0 = 0; %pi/4;
 
 y0 = [x0; h0; v0; gamma0];
 
-[t,y] = ode45(@(tin,yin) state_eqs(tin,yin,CD0,K,S,rho,m,g), tspan, y0);
+[t,y] = ode45(@state_eqs, tspan, y0);
+
+x = y(:,1);
+h = y(:,2);
+v = y(:,3);
+gamma = y(:,4);
+
+% find t when crashing
+tend = find(h < 0);
+tend = t(tend(1));
 
 figure;
 
 subplot(2, 2, 1);
-plot(t, y(:, 1));
+plot(t, x);
+xline(tend,'r')
 title('X-coordinate');
 
 subplot(2, 2, 2);
-plot(t, y(:, 2));
+plot(t, h);
+yline(0,'black')
+xline(tend,'r')
 title('Altitude h');
 
 subplot(2, 2, 3);
-plot(t, y(:, 3));
+plot(t, v);
+xline(tend,'r')
 title('Velocity v');
 
 subplot(2, 2, 4);
-plot(t, y(:, 4));
+plot(t, gamma);
+xline(tend,'r')
 title('Flight Path Angle Gamma');
 
 % Plot altitude h and x-coordinate together
 figure;
-plot(y(:, 1), y(:, 2));
+plot(x, h);
+yline(0,'black')
 xlabel('X-Coordinate');
 ylabel('Altitude h');
 title('Flight Path');
